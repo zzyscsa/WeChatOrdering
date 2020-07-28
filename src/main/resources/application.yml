@@ -1,0 +1,9 @@
+# 一种日志配置方式
+#logging:
+#  pattern:
+#    console: "%d - %msg%n" #日志的格式
+#  file: ./log/sell.log
+#  level:
+#    com.scsa.LoggerTest: debug
+##  level: debug #默认级别
+##  path: ./log/ #日志存储的位置
