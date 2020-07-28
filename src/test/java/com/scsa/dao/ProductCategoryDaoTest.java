@@ -30,7 +30,7 @@ public class ProductCategoryDaoTest extends TestCase {
     }
 
     @Test
-    @Transactional //不把测试数据留在数据库中，完全回滚
+//    @Transactional //不把测试数据留在数据库中，完全回滚
     public void saveTest() {
         ProductCategory productCategory = new ProductCategory();
         productCategory.setCategoryName("男生最爱");

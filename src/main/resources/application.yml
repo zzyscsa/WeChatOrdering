@@ -2,7 +2,10 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/wechat_ordering?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    password: 123456
+    url: jdbc:mysql://192.168.0.105:3306/wechat_ordering?&useUnicode=true&characterEncoding=utf-8
   jpa:
     show-sql: true
+
+server:
+  context-path: /sell #项目URL前缀
