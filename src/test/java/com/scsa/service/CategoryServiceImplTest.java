@@ -1,6 +1,7 @@
 package com.scsa.service;
 
 import com.scsa.dataobject.ProductCategory;
+import com.scsa.service.impl.CategoryServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

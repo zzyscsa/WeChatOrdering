@@ -6,6 +6,9 @@ spring:
     url: jdbc:mysql://192.168.0.105:3306/wechat_ordering?&useUnicode=true&characterEncoding=utf-8
   jpa:
     show-sql: true
+  jackson:
+    default-property-inclusion: non_null #不返回null的结果
 
 server:
   context-path: /sell #项目URL前缀
+

@@ -1,7 +1,8 @@
-package com.scsa.service;
+package com.scsa.service.impl;
 
 import com.scsa.dao.ProductCategoryDao;
 import com.scsa.dataobject.ProductCategory;
+import com.scsa.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

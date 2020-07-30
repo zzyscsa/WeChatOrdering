@@ -2,6 +2,7 @@ package com.scsa.service;
 
 import com.scsa.dataobject.ProductInfo;
 import com.scsa.enums.ProductStatusEnum;
+import com.scsa.service.impl.ProductServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @Author: SCSA
