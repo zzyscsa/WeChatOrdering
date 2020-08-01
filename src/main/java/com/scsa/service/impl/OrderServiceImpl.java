@@ -13,6 +13,7 @@ import com.scsa.enums.PayStatusEnum;
 import com.scsa.enums.ResultEnum;
 import com.scsa.exception.SellException;
 import com.scsa.service.OrderService;
+import com.scsa.service.PayService;
 import com.scsa.service.ProductService;
 import com.scsa.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +45,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterDao orderMasterDao;
+
+    @Autowired
+    private PayService payService;
 
     @Override
     @Transactional //事务,若抛出异常则回滚
@@ -156,8 +160,7 @@ public class OrderServiceImpl implements OrderService {
 
         //4. 如果已支付，则退款
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
-            //TODO
-
+            payService.refund(orderDTO);
         }
 
         return orderDTO;

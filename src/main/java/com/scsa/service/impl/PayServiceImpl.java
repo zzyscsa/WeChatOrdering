@@ -4,6 +4,8 @@ import com.lly835.bestpay.config.WxPayH5Config;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
+import com.lly835.bestpay.model.RefundRequest;
+import com.lly835.bestpay.model.RefundResponse;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
 import com.scsa.dto.OrderDTO;
 import com.scsa.enums.ResultEnum;
@@ -36,7 +38,11 @@ public class PayServiceImpl implements PayService {
     @Autowired
     private OrderService orderService;
 
-    /** 发起微信支付 */
+    /**
+     * 发起微信支付
+     * @param orderDTO
+     * @return
+     */
     @Override
     public PayResponse create(OrderDTO orderDTO) {
         PayRequest payRequest = new PayRequest();
@@ -54,7 +60,11 @@ public class PayServiceImpl implements PayService {
         return payResponse;
     }
 
-    /** 接收微信支付异步通知 */
+    /**
+     * 接收微信支付异步通知
+     * @param notifyData
+     * @return
+     */
     @Override
     public PayResponse notify(String notifyData) {
         //1. 验证签名
@@ -87,5 +97,24 @@ public class PayServiceImpl implements PayService {
         //修改订单状态
         orderService.paid(orderDTO);
         return payResponse;
+    }
+
+    /**
+     * 退款
+     * @param orderDTO
+     * @return
+     */
+    @Override
+    public RefundResponse refund(OrderDTO orderDTO) {
+        RefundRequest refundRequest = new RefundRequest();
+        refundRequest.setOrderId(orderDTO.getOrderId());
+        refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
+        refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
+        log.info("【微信退款】request={}", JsonUtil.toJson(refundRequest));
+
+        RefundResponse refundResponse = bestPayService.refund(refundRequest);
+        log.info("【微信退款】response={}", JsonUtil.toJson(refundResponse));
+
+        return refundResponse;
     }
 }
