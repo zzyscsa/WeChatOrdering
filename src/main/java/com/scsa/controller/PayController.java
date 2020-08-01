@@ -8,9 +8,7 @@ import com.scsa.service.OrderService;
 import com.scsa.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.UnsupportedEncodingException;
@@ -32,6 +30,14 @@ public class PayController {
     @Autowired
     private PayService payService;
 
+    /**
+     * 创建支付
+     * @param orderId
+     * @param returnUrl
+     * @param map
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     @GetMapping("/create")
     public ModelAndView create(@RequestParam("orderId") String orderId,
                                @RequestParam("returnUrl") String returnUrl,
@@ -50,5 +56,19 @@ public class PayController {
         map.put("returnUrl", returnUrl.startsWith("http://") ? returnUrl : URLEncoder.encode(returnUrl, "utf-8"));
 
         return new ModelAndView("pay/create", map);
+    }
+
+    /**
+     * 微信异步通知
+     * @param notifyData
+     */
+    @PostMapping("/notify")
+    public ModelAndView notify(@RequestBody String notifyData) {
+
+        payService.notify(notifyData);
+
+        //返回给微信处理的结果，不要持续给我发异步通知
+        //使用模板
+        return new ModelAndView("/pay/success");
     }
 }
