@@ -1,6 +1,5 @@
 package com.scsa.service.impl;
 
-import com.lly835.bestpay.config.WxPayH5Config;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
@@ -15,11 +14,9 @@ import com.scsa.service.PayService;
 import com.scsa.utils.JsonUtil;
 import com.scsa.utils.MathUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 
 /**
  * 支付
@@ -46,8 +43,7 @@ public class PayServiceImpl implements PayService {
     @Override
     public PayResponse create(OrderDTO orderDTO) {
         PayRequest payRequest = new PayRequest();
-        //强制为借用的openid
-        payRequest.setOpenid("oTgZpwYZvIiYcMAZ7rdLbSqKBR-Q");
+        payRequest.setOpenid(orderDTO.getBuyerOpenid());
         payRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
         payRequest.setOrderId(orderDTO.getOrderId());
         payRequest.setOrderName(ORDER_NAME);

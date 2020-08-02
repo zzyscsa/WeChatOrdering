@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 订单服务层
  * @Author: SCSA
  * @Date: 2020/7/29 20:46
  */
@@ -214,7 +215,17 @@ public class OrderServiceImpl implements OrderService {
         }
 
 
-
         return orderDTO;
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+
+        Page<OrderMaster> orderMasterPage = orderMasterDao.findAll(pageable);
+
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        Page<OrderDTO> orderDTOPage = new PageImpl<OrderDTO>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+        return orderDTOPage;
+
     }
 }

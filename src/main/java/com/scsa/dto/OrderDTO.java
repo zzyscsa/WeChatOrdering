@@ -1,8 +1,12 @@
 package com.scsa.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.scsa.dataobject.OrderDetail;
+import com.scsa.enums.OrderStatusEnum;
+import com.scsa.enums.PayStatusEnum;
+import com.scsa.utils.EnumUtil;
 import com.scsa.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -52,4 +56,15 @@ public class OrderDTO {
 
     /* 这个订单包含哪些商品（购物车） */
     List<OrderDetail> orderDetailList;
+
+    @JsonIgnore //转为json忽略这个方法
+    public OrderStatusEnum getOrderStatusEnum() {
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum() {
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
+
 }

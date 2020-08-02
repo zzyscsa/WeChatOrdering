@@ -14,10 +14,12 @@ server:
 
 wechat:
 #  公众账号，授权
-  mpAppId: wxd898fcb01713c658
-#  mpAppSecret:
 #  mpAppId: wxcb29648d6ad1f58f
 #  mpAppSecret: 1b65a3ef0da65e61e13c5ddf0e3681ef
+#  接用账号，支付
+  mpAppId: wxd898fcb01713c658
+  mpAppSecret:
+
 
 #  支付/商户号
   mchId: 1483469312
