@@ -19,16 +19,22 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@DynamicUpdate //自动填入当前更新时间，如果需要的话
+@DynamicUpdate //自动填入当前更新时间
 public class ProductCategory {
-    /* 类目id */
+    /** 类目id */
     @Id
     @GeneratedValue
     private Integer categoryId;
-    /* 类目名字 */
+    /** 类目名字 */
     private String categoryName;
-    /* 类目编号 */
+    /** 类目编号 */
     private Integer categoryType;
+
+    /** 创建时间 */
+    private Date createTime;
+
+    /** 修改时间 */
+    private Date updateTime;
 
     public ProductCategory(String categoryName, Integer categoryType) {
         this.categoryName = categoryName;
