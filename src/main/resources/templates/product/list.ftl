@@ -32,7 +32,7 @@
                         <tbody>
                         <#--framemaker遍历数据,返回的就是一个list-->
                         <#list productInfoPage.content as productInfo>
-                            <tr class="info">
+                            <tr>
                                 <td>${productInfo.productId}</td>
                                 <td>${productInfo.productName}</td>
                                 <#--根据图片连接显示图片-->

@@ -31,7 +31,7 @@
                             <tbody>
                             <#--framemaker遍历数据,返回的就是一个list-->
                             <#list orderDTOPage.content as orderDTO>
-                                <tr class="info">
+                                <tr>
                                     <td>${orderDTO.orderId}</td>
                                     <td>${orderDTO.buyerName}</td>
                                     <td>${orderDTO.buyerPhone}</td>

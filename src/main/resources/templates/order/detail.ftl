@@ -20,7 +20,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="info">
+                        <tr>
                             <td>${orderDTO.orderId}</td>
                             <td>${orderDTO.orderAmount}</td>
                         </tr>
@@ -42,7 +42,7 @@
                         </thead>
                         <tbody>
                         <#list orderDTO.orderDetailList as orderDetail>
-                            <tr class="info">
+                            <tr>
                                 <td>${orderDetail.productId}</td>
                                 <td>${orderDetail.productName}</td>
                                 <td>${orderDetail.productPrice}</td>

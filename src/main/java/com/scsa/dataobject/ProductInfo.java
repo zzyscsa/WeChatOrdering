@@ -42,8 +42,8 @@ public class ProductInfo {
     /** 小图地址 */
     private String productIcon;
 
-    /** 状态：0正常1下加 */
-    private Integer productStatus;
+    /** 状态：0在家1下架；默认在架 */
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
 
     /** 类目编号 */
     private Integer categoryType;
