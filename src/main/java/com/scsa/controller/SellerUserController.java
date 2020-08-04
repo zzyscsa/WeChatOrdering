@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.UUID;
@@ -49,7 +50,7 @@ public class SellerUserController {
         //1. openid去和数据库里面的数据匹配
         SellerInfo sellerInfo = sellerService.findSellerInfoByOpenid(openid);
         if (sellerInfo == null) {
-            map.put("msg", ResultEnum.LOGIN_FAIL);
+            map.put("msg", ResultEnum.LOGIN_FAIL.getMessage());
             map.put("url", "/sell/seller/order/list");
             return new ModelAndView("common/error");
         }
@@ -73,7 +74,21 @@ public class SellerUserController {
     }
 
     @GetMapping("/logout")
-    public void logout() {
+    public ModelAndView logout(HttpServletRequest request,
+                       HttpServletResponse response,
+                       Map<String, Object> map) {
 
+        //1. 从cookie查询
+        Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
+        if (cookie != null) {
+            //2. 清除redis, key中的token是cookie的value值
+            redisTemplate.opsForValue().getOperations().delete(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
+
+            //3. 清除cookie
+            CookieUtil.set(response, CookieConstant.TOKEN, null, 0);
+        }
+        map.put("msg", ResultEnum.LOGOUT.getMessage());
+        map.put("url", "/sell/seller/order/list");
+        return new ModelAndView("common/success", map);
     }
 }

@@ -88,7 +88,8 @@ public class WechatController {
             "")
     public String qrUserInfo(@RequestParam("code") String code
                              /*@RequestParam("state") String returnUrl*/) {
-        String returnUrl = "http://www.baidu.com";
+        //接用的账号，没法直接得到跳转参数，只能获得openid，先把写死这里
+        String returnUrl = "http://mrscsa.natapp1.cc/sell/seller/login";
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
         try {
             wxMpOAuth2AccessToken = wxOpenService.oauth2getAccessToken(code);
