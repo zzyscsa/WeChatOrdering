@@ -12,10 +12,7 @@ import com.scsa.enums.OrderStatusEnum;
 import com.scsa.enums.PayStatusEnum;
 import com.scsa.enums.ResultEnum;
 import com.scsa.exception.SellException;
-import com.scsa.service.OrderService;
-import com.scsa.service.PayService;
-import com.scsa.service.ProductService;
-import com.scsa.service.PushMessageService;
+import com.scsa.service.*;
 import com.scsa.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -53,6 +50,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private PushMessageService pushMessageService;
+
+    @Autowired
+    private WebSocket webSocket;
 
     @Override
     @Transactional //事务,若抛出异常则回滚
@@ -97,6 +97,9 @@ public class OrderServiceImpl implements OrderService {
                 ).collect(Collectors.toList());
 
         productService.decreaseStock(cartDTOList);
+
+        //5. 发送webSocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }

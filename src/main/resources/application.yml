@@ -26,14 +26,14 @@ wechat:
 #  mpAppSecret:
 
 #  开放平台(登录)
-#  openAppId: wx6ad144e54af67d87
-#  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e
+  openAppId: wx6ad144e54af67d87
+  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e
 
-# 消息推送
-  mpAppId: wxcb29648d6ad1f58f
-  mpAppSecret: 1b65a3ef0da65e61e13c5ddf0e3681ef
-  templateId:
-    orderStatus: Yw7nxHJFnU2zr_UX4QIOxbdI26cutMFNxrDxAWcojmg
+## 消息推送
+#  mpAppId: wxcb29648d6ad1f58f
+#  mpAppSecret: 1b65a3ef0da65e61e13c5ddf0e3681ef
+#  templateId:
+#    orderStatus: Yw7nxHJFnU2zr_UX4QIOxbdI26cutMFNxrDxAWcojmg
 
 
 
