@@ -15,6 +15,7 @@ import com.scsa.exception.SellException;
 import com.scsa.service.OrderService;
 import com.scsa.service.PayService;
 import com.scsa.service.ProductService;
+import com.scsa.service.PushMessageService;
 import com.scsa.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -49,6 +50,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private PayService payService;
+
+    @Autowired
+    private PushMessageService pushMessageService;
 
     @Override
     @Transactional //事务,若抛出异常则回滚
@@ -185,6 +189,9 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完结订单】更新失败，orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+
+        //3. 推送微信模板消息 , 不要抛异常，否则整个事务都回滚
+        pushMessageService.orderStatus(orderDTO);
 
         return orderDTO;
     }
