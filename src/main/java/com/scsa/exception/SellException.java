@@ -1,12 +1,14 @@
 package com.scsa.exception;
 
 import com.scsa.enums.ResultEnum;
+import lombok.Getter;
 
 /**
  * Sell异常处理
  * @Author: SCSA
  * @Date: 2020/7/29 20:55
  */
+@Getter
 public class SellException extends RuntimeException {
 
     private Integer code;
