@@ -48,4 +48,9 @@ projectUrl:
   wechatMpAuthorize: http://mrscsa.natapp1.cc
   wechatOpenAuthorize: http://mrscsa.natapp1.cc
   sell: http://mrscsa.natapp1.cc
+logging:
+  level:
+    com.scsa.dataobject.mapper: trace  # 设置mybatisri日志级别，打印出来
 
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
