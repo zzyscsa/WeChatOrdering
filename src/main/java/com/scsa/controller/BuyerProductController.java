@@ -10,6 +10,7 @@ import com.scsa.service.ProductService;
 import com.scsa.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +35,9 @@ public class BuyerProductController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
+//    //假如传入参数sellerId，只有在sellerId 长度大于3 且 结果不为0才进行缓存
+//    @Cacheable(cacheNames = "product", key = "#sellerId", condition = "#sellerId.length() > 3", unless = "#result.getCode()!=0")
+    @Cacheable(cacheNames = "product", key = "123") //加入缓存
     public ResultVo list() {
         // 1. 查询所有上架商品
         List<ProductInfo> productInfoList = productService.findUpAll();

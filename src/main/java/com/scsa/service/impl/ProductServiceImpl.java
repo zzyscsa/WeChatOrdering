@@ -8,6 +8,9 @@ import com.scsa.enums.ResultEnum;
 import com.scsa.exception.SellException;
 import com.scsa.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,11 +23,13 @@ import java.util.List;
  * @Date: 2020/7/28 21:18
  */
 @Service
+//@CacheConfig(cacheNames = "product")
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductInfoDao productInfoDao;
 
     @Override
+//    @Cacheable(key = "123456") //不写key默认是传入参数的值
     public ProductInfo findOne(String ProductId) {
         return productInfoDao.findOne(ProductId);
     }
@@ -40,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+//    @CachePut(key = "123456")
     public ProductInfo save(ProductInfo productInfo) {
         return productInfoDao.save(productInfo);
     }
